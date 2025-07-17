@@ -1,0 +1,3 @@
+# Jump Server 的 SSH 相關設定
+jump_server_host: "root@server"
+jump_server_ssh_arguments: "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no"

@@ -1,0 +1,129 @@
+@{
+    ViewBag.Title = "Kubernetes API Test";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h2>Kubernetes API Connection Test</h2>
+            
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5>API Endpoint Information</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>API URL:</strong> <code>@ViewBag.ApiUrl</code></p>
+                    <p><strong>Expected Response:</strong> JSON with namespaces as keys and pod metrics arrays as values</p>
+                    <h6>Data Types and Units:</h6>
+                    <ul>
+                        <li><strong>CPU:</strong> double - CPU core per second</li>
+                        <li><strong>Memory:</strong> double - Bytes of memory used</li>
+                        <li><strong>Network I/O:</strong> double - Bytes received/transmitted</li>
+                        <li><strong>Pod Status:</strong> double - 1.0 if running, 0.0 if not</li>
+                    </ul>
+                    <h6>Example Response Structure:</h6>
+                    <pre class="bg-light p-2 rounded"><code>{
+  "default": [
+    {
+      "namespace": "default",
+      "service": "web-service",
+      "pod": "web-pod-123",
+      "node": "node-1",
+      "cpu": [0.1, 0.2, 0.15],
+      "mem": [1024.4, 1100.5, 1050.6],
+      "net_in": [100.12, 150.15, 120.45],
+      "net_out": [80.66, 90.05, 85.08],
+      "pod_status": [1.0, 1.0, 1.0]
+    }
+  ]
+}</code></pre>
+                </div>
+            </div>
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger">
+                    <strong>Connection Error:</strong> @ViewBag.Error
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-success">
+                    <strong>API Connection:</strong> Successful ?
+                </div>
+
+                @if (ViewBag.ParseSuccess == true)
+                {
+                    <div class="alert alert-success">
+                        <strong>Data Parsing:</strong> Successful ?
+                    </div>
+                    
+                    @if (ViewBag.ParsedData != null)
+                    {
+                        var parsedData = ViewBag.ParsedData as Dictionary<string, List<LLMMgmtAgent.Web.Models.PodMetrics>>;
+                        
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5>Parsed Data Summary</h5>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>Total Namespaces:</strong> @parsedData.Count</p>
+                                <p><strong>Total Pods:</strong> @parsedData.Values.SelectMany(x => x).Count()</p>
+                                
+                                <h6>Namespaces:</h6>
+                                <ul>
+                                    @foreach (var ns in parsedData.Keys)
+                                    {
+                                        <li>@ns (@parsedData[ns].Count pods)</li>
+                                    }
+                                </ul>
+                                
+                                <h6>Sample Data (First Pod):</h6>
+                                @if (parsedData.Values.SelectMany(x => x).Any())
+                                {
+                                    var firstPod = parsedData.Values.SelectMany(x => x).First();
+                                    <table class="table table-sm">
+                                        <tr><th>Property</th><th>Value</th><th>Unit</th></tr>
+                                        <tr><td>Pod Name</td><td>@firstPod.Pod</td><td>-</td></tr>
+                                        <tr><td>Namespace</td><td>@firstPod.Namespace</td><td>-</td></tr>
+                                        <tr><td>CPU (latest)</td><td>@(firstPod.Cpu.Any() ? firstPod.Cpu.Last().ToString("F3") : "N/A")</td><td>cores</td></tr>
+                                        <tr><td>Memory (latest)</td><td>@(firstPod.Mem.Any() ? (firstPod.Mem.Last() / 1024 / 1024).ToString("F1") : "N/A")</td><td>MB</td></tr>
+                                        <tr><td>Network In (latest)</td><td>@(firstPod.NetIn.Any() ? (firstPod.NetIn.Last() / 1024 / 1024).ToString("F1") : "N/A")</td><td>MB</td></tr>
+                                        <tr><td>Network Out (latest)</td><td>@(firstPod.NetOut.Any() ? (firstPod.NetOut.Last() / 1024 / 1024).ToString("F1") : "N/A")</td><td>MB</td></tr>
+                                        <tr><td>Status (latest)</td><td>@(firstPod.PodStatus.Any() ? (firstPod.PodStatus.Last() == 1.0 ? "Running" : "Not Running") : "N/A")</td><td>-</td></tr>
+                                    </table>
+                                }
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="alert alert-warning">
+                        <strong>Data Parsing:</strong> Failed ??
+                        <br />
+                        <strong>Error:</strong> @ViewBag.ParseError
+                    </div>
+                }
+            }
+
+            <div class="card">
+                <div class="card-header">
+                    <h5>Raw API Response</h5>
+                </div>
+                <div class="card-body">
+                    <pre class="bg-dark text-light p-3 rounded" style="max-height: 400px; overflow-y: auto; font-size: 0.8em;">@ViewBag.RawResponse</pre>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <a href="@Url.Action("Pods", "Kubernetes")" class="btn btn-primary">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </a>
+                <button class="btn btn-secondary" onclick="location.reload()">
+                    <i class="fas fa-sync-alt"></i> Refresh Test
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

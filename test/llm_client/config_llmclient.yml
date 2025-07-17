@@ -1,0 +1,8 @@
+# Azure OpenAI 服務的相關設定
+azure_api_key: ""
+azure_api_version: ""
+azure_endpoint: ""
+
+# 用於不同階段的語言模型部署名稱
+judge_deployment_name: "gpt-4.1"
+agent_deployment_name: "gpt-4.1"

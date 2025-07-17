@@ -1,0 +1,7 @@
+# Jump Server 的 SSH 相關設定
+jump_server_host: "root@server"
+jump_server_ssh_arguments: "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no"
+
+# API 端點設定
+loki_api_url: "http://localhost:8000"  # Loki API 服務端點
+prometheus_api_url: "http://localhost:8081"  # Prometheus API 服務端點

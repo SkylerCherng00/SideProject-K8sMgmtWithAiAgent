@@ -1,0 +1,2 @@
+# API settings
+loki_url: "http://192.168.72.58:3100"

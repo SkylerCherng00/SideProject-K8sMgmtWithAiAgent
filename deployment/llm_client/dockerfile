@@ -1,0 +1,23 @@
+# Use official Python 3.12 slim image
+FROM python:3.12-slim
+
+# Install SSH client and essential utilities
+RUN apt-get update && apt-get install -y \
+    openssh-client \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /app
+
+# Copy requirements and install Python dependencies
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the application code
+COPY . .
+
+# Expose the port the app runs on
+EXPOSE 10000
+
+# Default command to run llm_client.py
+CMD ["uvicorn", "llm_client:app", "--host", "0.0.0.0", "--port", "10000", "--reload"]

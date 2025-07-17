@@ -1,0 +1,8 @@
+# Azure OpenAI Associated Configurations
+azure_api_key: ""
+azure_api_version: ""
+azure_endpoint: ""
+
+# Azure OpenAI Deployment Names
+judge_deployment_name: "gpt-4.1"
+agent_deployment_name: "gpt-4.1"

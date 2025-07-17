@@ -1,0 +1,315 @@
+﻿@{
+    // Set the page title that will be displayed in the browser tab and page header
+    ViewData["Title"] = "首頁";
+}
+
+<!-- Main container using Bootstrap grid system -->
+<div class="row">
+    <div class="col-12">
+        <!-- Page header with welcome message -->
+        <h1 class="mb-4">歡迎來到 LLM 管理系統</h1>
+        <!-- Brief description of the system and its responsive sidebar navigation -->
+        <p>
+            這是您的主要內容區域。您可以根據需要在此處添加任何文本、圖像、表格或其他元素。
+            側拉式選單提供了一個簡潔的導航方式，特別適用於響應式設計。
+        </p>
+        
+        <!-- 
+            ========================================
+            KUBERNETES CLUSTER ANALYSIS SECTION
+            ========================================
+            This section provides real-time Kubernetes cluster analysis functionality.
+            Users can trigger an analysis that queries the cluster status over the last 30 minutes.
+        -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <!-- Main analysis card with shadow and rounded corners -->
+                <div class="card shadow-sm mb-3 rounded-lg">
+                    <!-- Card header with dark background, white text, and flex layout -->
+                    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">
+                            <!-- FontAwesome search icon with margin -->
+                            <i class="fas fa-search-plus me-2"></i> Kubernetes 叢集現況分析
+                        </h5>
+                        <div class="d-flex gap-2">
+                            <!-- 
+                                Toggle button for collapsing/expanding analysis content
+                                - Uses Bootstrap's collapse functionality
+                                - Dynamically updates icon and text via JavaScript
+                            -->
+                            <button id="toggleAnalysisBtn" class="btn btn-outline-light btn-sm rounded-pill" type="button" data-bs-toggle="collapse" data-bs-target="#analysisContent" aria-expanded="true" aria-controls="analysisContent">
+                                <i class="fas fa-angle-up"></i> <span>收起內容</span>
+                            </button>
+                            <!-- 
+                                Primary action button that triggers K8s analysis
+                                - Light colored button with small size and pill shape
+                                - Contains sync icon and Chinese text
+                                - Connected to k8s-analyzer.js JavaScript module
+                            -->
+                            <button id="analyzeK8sBtn" class="btn btn-light btn-sm rounded-pill">
+                                <i class="fas fa-sync-alt me-1"></i> 立即分析叢集
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Analysis content container with collapsible functionality -->
+                    <div id="k8sAnalysisContainer">
+                        <!-- 
+                            Bootstrap collapse component that shows/hides analysis content
+                            - Initially shown (class="collapse show")
+                            - Controlled by toggle button below
+                        -->
+                        <div id="analysisContent" class="collapse show">
+                            <div class="card-body">
+                                <!-- 
+                                    Information alert with toggle button
+                                    - Blue info alert style
+                                    - Contains instructions and collapse toggle
+                                -->
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle me-2"></i> 點擊「立即分析叢集」按鈕以獲取 Kubernetes 叢集近 30 分鐘的運行狀況報告。
+                                </div>
+
+                                <!-- 
+                                    Loading indicator (initially hidden with d-none)
+                                    - Shows spinning animation during analysis
+                                    - Controlled by k8s-analyzer.js
+                                -->
+                                <div id="k8sAnalysisLoading" class="text-center my-4 d-none">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="visually-hidden">正在載入...</span>
+                                    </div>
+                                    <p class="mt-2">正在分析叢集狀態，請稍候...</p>
+                                </div>
+
+                                <!-- 
+                                    Error message container (initially hidden)
+                                    - Red danger alert style
+                                    - Populated by JavaScript when errors occur
+                                -->
+                                <div id="k8sAnalysisError" class="alert alert-danger d-none"></div>
+
+                                <!-- 
+                                    Analysis results container (initially hidden)
+                                    - Contains markdown-rendered analysis report
+                                    - Populated by JavaScript after successful analysis
+                                -->
+                                <div id="k8sAnalysisResult" class="mt-3 border-top pt-3 d-none"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 
+            ========================================
+            MAIN FEATURE CARDS SECTION
+            ========================================
+            Two-column layout showcasing the main system features:
+            1. AI Chat Assistant
+            2. Kubernetes Dashboard
+        -->
+        <div class="row">
+            <!-- AI Chat Assistant Card -->
+            <div class="col-md-6">
+                <div class="card shadow-sm mb-3 rounded-lg">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <!-- Blue comment icon representing chat functionality -->
+                            <i class="fas fa-comments text-primary"></i> AI 聊天助手
+                        </h5>
+                        <p class="card-text">與 AI 助手進行對話，獲得智能回應和協助。</p>
+                        <!-- 
+                            Navigation link to AI Chat functionality
+                            - Uses Razor's Url.Action helper to generate route
+                            - Points to AiChat action in Home controller
+                        -->
+                        <a href="@Url.Action("AiChat", "Home")" class="btn btn-primary rounded-md">
+                            <i class="fas fa-arrow-right"></i> 開始對話
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Kubernetes Dashboard Card -->
+            <div class="col-md-6">
+                <div class="card shadow-sm mb-3 rounded-lg">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <!-- Green cubes icon representing Kubernetes -->
+                            <i class="fas fa-cubes text-success"></i> Kubernetes 儀表板
+                        </h5>
+                        <p class="card-text">查看和管理 Kubernetes 集群中的 Pod 監控和指標。</p>
+                        <!-- 
+                            Multiple action buttons for different K8s functionalities
+                            - Dashboard: Pod monitoring and metrics
+                            - Logs: Pod log viewing functionality
+                        -->
+                        <div class="d-flex gap-2">
+                            <a href="@Url.Action("Pods", "Kubernetes")" class="btn btn-success rounded-md">
+                                <i class="fas fa-chart-line"></i> 查看儀表板
+                            </a>
+                            <a href="@Url.Action("Logs", "Kubernetes")" class="btn btn-info rounded-md">
+                                <i class="fas fa-file-alt"></i> 查看日誌
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 
+            ========================================
+            SECONDARY FEATURES SECTION
+            ========================================
+            Additional system features and information:
+            1. API Connection Testing
+            2. System Features Overview
+        -->
+        <div class="row">
+            <!-- API Connection Testing Card -->
+            <div class="col-md-6">
+                <div class="card shadow-sm mb-3 rounded-lg">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <!-- Orange vial icon representing testing -->
+                            <i class="fas fa-vial text-warning"></i> API 連接測試
+                        </h5>
+                        <p class="card-text">測試與 Kubernetes API 的連接狀態和數據結構。</p>
+                        <!-- 
+                            Link to API testing functionality
+                            - Points to TestApi action in Kubernetes controller
+                            - Useful for debugging and connection verification
+                        -->
+                        <a href="@Url.Action("TestApi", "Kubernetes")" class="btn btn-warning rounded-md">
+                            <i class="fas fa-flask"></i> 測試 API
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- System Features Overview Card -->
+            <div class="col-md-6">
+                <div class="card shadow-sm mb-3 rounded-lg">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <!-- Blue info icon -->
+                            <i class="fas fa-info-circle text-info"></i> 系統功能
+                        </h5>
+                        <p class="card-text">本系統提供以下主要功能：</p>
+                        <!-- 
+                            Feature list with check icons
+                            - Unstyled list for clean appearance
+                            - Each item has a green check circle icon
+                        -->
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check-circle text-success"></i> AI 聊天對話功能</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Kubernetes Pod 監控</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Pod 日誌搜索和查看</li>
+                            <li><i class="fas fa-check-circle text-success"></i> 即時圖表和指標</li>
+                            <li><i class="fas fa-check-circle text-success"></i> 自動刷新（每分鐘）</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 
+    ========================================
+    SCRIPTS SECTION
+    ========================================
+    This section contains all JavaScript dependencies and custom scripts
+    for the Kubernetes analysis functionality.
+-->
+@section scripts {
+    <!-- 
+        External CDN library for markdown rendering
+        - marked.js: Converts markdown text to HTML
+        - Used for rendering K8s analysis reports
+        - Loaded from jsDelivr CDN for reliability
+    -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <!-- 
+        Custom JavaScript module for Kubernetes analysis
+        - Handles AJAX requests to /Home/AnalyzeK8s endpoint
+        - Manages UI state (loading, errors, results)
+        - Renders markdown responses using marked.js
+        - Implements the module pattern for clean code organization
+    -->
+    <script src="~/js/k8s-analyzer.js"></script>
+    
+    <!-- 
+        Inline JavaScript for collapse button functionality
+        - Handles the toggle button in the analysis section
+        - Updates button icon and text based on collapse state
+        - Uses Bootstrap's collapse API for smooth animations
+    -->
+    <script>
+        // Wait for DOM to be fully loaded before initializing
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get references to the toggle button and its child elements
+            const toggleBtn = document.getElementById('toggleAnalysisBtn');
+            const toggleIcon = toggleBtn.querySelector('i');        // FontAwesome icon
+            const toggleText = toggleBtn.querySelector('span');     // Button text
+            
+            // Add click event listener to handle icon/text changes
+            toggleBtn.addEventListener('click', function() {
+                // Toggle icon and text based on aria-expanded state
+                // This state is managed by Bootstrap's collapse component
+                if (toggleBtn.getAttribute('aria-expanded') === 'true') {
+                    // Content is expanded, show "collapse" state
+                    toggleIcon.classList.replace('fa-angle-up', 'fa-angle-down');
+                    toggleText.textContent = '展開內容';
+                } else {
+                    // Content is collapsed, show "expand" state
+                    toggleIcon.classList.replace('fa-angle-down', 'fa-angle-up');
+                    toggleText.textContent = '收起內容';
+                }
+            });
+        });
+    </script>
+}
+
+<!-- 
+    ========================================
+    TECHNICAL NOTES AND ARCHITECTURE
+    ========================================
+    
+    This view represents the main dashboard of the LLM Management System with the following key components:
+    
+    1. **Responsive Layout**: Uses Bootstrap 5 grid system for mobile-first responsive design
+    
+    2. **Kubernetes Integration**: 
+       - Real-time cluster analysis via AJAX calls
+       - Markdown rendering for formatted reports
+       - Error handling and loading states
+    
+    3. **Navigation Structure**:
+       - Home Controller: AI Chat functionality
+       - Kubernetes Controller: Pod monitoring, logs, API testing
+    
+    4. **JavaScript Architecture**:
+       - Modular design with k8s-analyzer.js
+       - Event-driven UI updates
+       - Bootstrap integration for UI components
+    
+    5. **Styling Framework**:
+       - Bootstrap 5 for layout and components
+       - FontAwesome for icons
+       - Custom CSS classes for enhanced styling
+    
+    6. **User Experience Features**:
+       - Loading indicators for async operations
+       - Error messages with user-friendly text
+       - Collapsible sections for better space utilization
+       - Auto-refresh capabilities mentioned in feature list
+    
+    7. **Security Considerations**:
+       - Server-side action methods for sensitive operations
+       - Client-side validation and error handling
+       - Proper HTML escaping in dynamic content
+-->

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <!--  Bootstrap CSS -->
+    <link href="@Url.Content("~/css/bootstrap.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/css/site.css")" rel="stylesheet" />
+    <!-- Markdown styling -->
+    <link href="@Url.Content("~/css/markdown.css")" rel="stylesheet" />
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Highlight.js for code syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+    
+    <div id="side-nav" class="sidebar">
+        <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-home"></i> 首頁
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Home" asp-action="AiChat">
+                    <i class="fas fa-comments"></i> 聊天助手
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Kubernetes" asp-action="Pods">
+                    <i class="fas fa-cubes"></i> Kubernetes Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Kubernetes" asp-action="Logs">
+                    <i class="fas fa-file-alt"></i> Pod Logs
+                </a>
+            </li>
+            @* <li class="nav-item">
+                <a class="nav-link" asp-controller="Kubernetes" asp-action="TestApi">
+                    <i class="fas fa-vial"></i> API Test
+                </a>
+            </li> *@
+        </ul>
+    </div>
+
+    <div id="main-content">
+        <nav class="navbar navbar-light bg-light rounded-md shadow-sm mb-4">
+            <div class="container-fluid">
+                <button class="open-sidebar-btn" onclick="openNav()">&#9776; 開啟選單</button>
+                <a class="navbar-brand ms-auto" href="#">@ViewData["Title"]</a>
+            </div>
+        </nav>
+
+        <div class="container-fluid">
+            @RenderBody()
+        </div>
+    </div>
+
+    <script src="@Url.Content("~/js/bootstrap.bundle.min.js")"></script>
+    <script src="@Url.Content("~/js/site.js")"></script>
+    <script src="@Url.Content("~/js/utils.js")"></script>
+    
+    <!-- Markdown processing libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="@Url.Content("~/js/markdown-renderer.js")"></script>
+    
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

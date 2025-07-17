@@ -1,0 +1,2 @@
+# API settings
+prometheus_url: "http://192.168.72.59:9090"

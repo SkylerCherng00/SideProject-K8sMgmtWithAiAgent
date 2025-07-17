@@ -1,0 +1,254 @@
+@model LLMMgmtAgent.Web.Models.LogsViewModel
+@{
+    ViewData["Title"] = "Kubernetes Logs";
+    var hasLogs = Model.LogData != null && Model.LogData.Any() && Model.LogData.First().Values != null && Model.LogData.First().Values.Any();
+}
+
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">
+                        <i class="fas fa-file-alt me-2"></i> Kubernetes Pod Logs
+                    </h5>
+                    @if (Model.LastRefresh.HasValue)
+                    {
+                        <span class="text-muted small">Last refreshed: @Model.LastRefresh.Value.ToString("yyyy-MM-dd HH:mm:ss")</span>
+                    }
+                </div>
+                
+                @if (Model.AvailableLabels != null && Model.AvailableLabels.Any())
+                {
+                    <div class="card-body pt-3 pb-0">
+                        <div class="mb-3">
+                            <p class="mb-2">
+                                <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#labelsCollapse" aria-expanded="false" aria-controls="labelsCollapse">
+                                    <i class="fas fa-tags me-1"></i> 
+                                    Show/Hide Available Labels
+                                </button>
+                            </p>
+                            <div class="collapse" id="labelsCollapse">
+                                <div class="card card-body p-0">
+                                    <ul class="nav nav-tabs" id="labelsTab" role="tablist">
+                                        @{int tabIndex = 0;}
+                                        @foreach (var labelGroup in Model.AvailableLabels)
+                                        {
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link @(tabIndex == 0 ? "active" : "")" 
+                                                        id="@labelGroup.Key-tab" 
+                                                        data-bs-toggle="tab" 
+                                                        data-bs-target="#@labelGroup.Key-tab-pane" 
+                                                        type="button" 
+                                                        role="tab" 
+                                                        aria-controls="@labelGroup.Key-tab-pane" 
+                                                        aria-selected="@(tabIndex == 0 ? "true" : "false")">
+                                                    @labelGroup.Key
+                                                </button>
+                                            </li>
+                                            tabIndex++;
+                                        }
+                                    </ul>
+                                    <div class="tab-content p-3" id="labelsTabContent">
+                                        @{tabIndex = 0;}
+                                        @foreach (var labelGroup in Model.AvailableLabels)
+                                        {
+                                            <div class="tab-pane fade @(tabIndex == 0 ? "show active" : "")" 
+                                                id="@labelGroup.Key-tab-pane" 
+                                                role="tabpanel" 
+                                                aria-labelledby="@labelGroup.Key-tab" 
+                                                tabindex="0">
+                                                <div class="d-flex flex-wrap gap-2 mb-2">
+                                                    @foreach (var value in labelGroup.Value)
+                                                    {
+                                                        <button type="button" class="btn btn-sm btn-outline-primary label-value-btn" 
+                                                                data-label="@labelGroup.Key" 
+                                                                data-value="@value">
+                                                            @value
+                                                        </button>
+                                                    }
+                                                </div>
+                                            </div>
+                                            tabIndex++;
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <div class="card-body">
+                    <form method="post" id="logQueryForm">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="Query">LogQL Query</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="Query" name="Query" placeholder='{app="tempo"}' value="@Model.CurrentQuery">
+                                        <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                                            <i class="fas fa-list"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end" id="labelSelector">
+                                            @if (Model.AvailableLabels != null && Model.AvailableLabels.Any())
+                                            {
+                                                @foreach (var labelGroup in Model.AvailableLabels)
+                                                {
+                                                    <li><h6 class="dropdown-header">@labelGroup.Key</h6></li>
+                                                    @foreach (var value in labelGroup.Value)
+                                                    {
+                                                        <li><a class="dropdown-item label-value" data-label="@labelGroup.Key" data-value="@value" href="javascript:void(0)">{@labelGroup.Key="@value"}</a></li>
+                                                    }
+                                                    <li><hr class="dropdown-divider"></li>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <li><span class="dropdown-item-text">No labels available</span></li>
+                                            }
+                                        </ul>
+                                    </div>
+                                    <small class="form-text text-muted">Example: {app="tempo"}</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="form-group mb-3">
+                                            <label for="StartTime">Start Time</label>
+                                            <input type="text" class="form-control" id="StartTime" name="StartTime" placeholder="YYYY-MM-DD HH:MM:SS" value="@Model.StartTime">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group mb-3">
+                                            <label for="EndTime">End Time</label>
+                                            <input type="text" class="form-control" id="EndTime" name="EndTime" placeholder="YYYY-MM-DD HH:MM:SS" value="@Model.EndTime">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group mb-3">
+                                            <label for="Limit">Limit</label>
+                                            <input type="number" class="form-control" id="Limit" name="Limit" min="1" max="5000" value="@Model.Limit">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-search me-1"></i> Query Logs
+                                        </button>
+                                        <button type="button" class="btn btn-outline-secondary ms-2" id="refreshButton">
+                                            <i class="fas fa-sync-alt me-1"></i> Refresh
+                                        </button>
+                                    </div>
+                                    <div>
+                                        @if (hasLogs)
+                                        {
+                                            <span class="badge bg-info text-dark">Found @Model.TotalLogs log entries</span>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    @if (Model.HasError)
+                    {
+                        <div class="alert alert-danger mt-4">
+                            <i class="fas fa-exclamation-circle me-2"></i>
+                            <strong>Error:</strong> @Model.ErrorMessage
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (hasLogs)
+    {
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-header d-flex justify-content-between">
+                        <h5 class="mb-0">
+                            <i class="fas fa-list me-2"></i> Log Results
+                        </h5>
+                        <div>
+                            <button id="copyLogsBtn" class="btn btn-sm btn-outline-secondary">
+                                <i class="fas fa-copy me-1"></i> Copy
+                            </button>
+                            <button id="downloadLogsBtn" class="btn btn-sm btn-outline-secondary ms-2">
+                                <i class="fas fa-download me-1"></i> Download
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover mb-0" id="logsTable">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 200px">Timestamp</th>
+                                        <th>Log Message</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var logEntry in Model.LogData.First().Values.OrderByDescending(l => l.Timestamp))
+                                    {
+                                        <tr>
+                                            <td class="text-nowrap">@logEntry.Timestamp</td>
+                                            <td><pre class="mb-0 log-message">@logEntry.Log</pre></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Styles {
+    <style>
+        pre.log-message {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 0.9em;
+            background-color: transparent;
+            padding: 0;
+            margin: 0;
+            max-height: none;
+            border: none;
+        }
+        #labelSelector {
+            max-height: 400px;
+            overflow-y: auto;
+            width: 300px;
+        }
+        .dropdown-header {
+            font-weight: bold;
+            color: #0d6efd;
+        }
+        .nav-tabs .nav-link {
+            font-size: 0.9rem;
+            padding: 0.4rem 0.8rem;
+        }
+        #labelsTabContent {
+            max-height: 250px;
+            overflow-y: auto;
+        }
+        .label-value-btn:hover {
+            background-color: #0d6efd;
+            color: white;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script src="~/js/kubernetes-logs.js"></script>
+}
