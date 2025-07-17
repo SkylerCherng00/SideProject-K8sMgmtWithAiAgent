@@ -10,7 +10,7 @@
 
 LLM Management Agent is a web application built with ASP.NET Core that combines AI chat functionality with Kubernetes cluster monitoring. It provides an intuitive interface for interacting with AI models and managing Kubernetes resources from a single dashboard.
 
-![Dashboard Screenshot](https://via.placeholder.com/800x450.png text=LLM+Management+Agent+Dashboard)
+Screenshot
 
 ## Features
 
