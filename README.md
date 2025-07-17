@@ -3,7 +3,7 @@
 [![.NET 9](https://img.shields.io/badge/.NET-9-512BD4)](https://dotnet.microsoft.com/)
 [![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-9.0-blue)](https://docs.microsoft.com/en-us/aspnet/core/)
 [![Python 3.12](https://img.shields.io/badge/Python-3.12-blue)](https://www.python.org/downloads/release/python-3120/)
-[![Kubernetes 1.32](https://img.shields.io/badge/Kubernetes-v1.32-green)](https://kubernetes.io/)]
+[![Kubernetes 1.32](https://img.shields.io/badge/Kubernetes-v1.32-green)](https://kubernetes.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Overview
@@ -81,10 +81,6 @@ LLMMgmt follows the MVC (Model-View-Controller) architectural pattern:
 - Long-term memory for AI interactions
 - User authentication and authorization
 - Integration with CI/CD pipelines
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Contact
 
