@@ -44,18 +44,10 @@ LLMMgmt follows the MVC (Model-View-Controller) architectural pattern:
 
 ### Key Components
 
-deployment/
-¢u¢w¢w llm_client               # FastAPI forClient application for AI chat
-¢u¢w¢w llm_mgmt_web             # ASP.NET Core web application for LLM management
-¢x   ¢u¢w¢w LLMMgmt.Web
-¢x   ¢x   ¢u¢w¢w Controllers      # MVC controllers
-¢x   ¢x   ¢u¢w¢w Models           # Data models and ViewModels
-¢x   ¢x   ¢u¢w¢w Services         # API and business logic services
-¢x   ¢x   ¢u¢w¢w Views            # Razor views for UI
-¢x   ¢x   ¢u¢w¢w wwwroot          # Static assets (CSS, JS)
-¢x   ¢x   ¢|¢w¢w Program.cs       # Application entry point and DI setup
-¢u¢w¢w loki                     # FastAPI for Loki logging service
-¢|¢w¢w prom			         # FastAPI for Prometheus metrics service
+- llm_mgmt_web: ASP.NET Core MVC application
+- llm_client: FastAPI forClient application for AI chat and analysis
+- loki: FastAPI for Loki logging service
+- prom: FastAPI for Prometheus metrics service
 
 ## Technologies
 
@@ -82,7 +74,7 @@ deployment/
 
 | AI Chat | Kubernetes Dashboard | Pod Logs |
 |---------|---------------------|----------|
-| ![Chat](https://via.placeholder.com/300x200.png text=AI+Chat) | ![Dashboard](https://via.placeholder.com/300x200.png text=K8s+Dashboard) | ![Logs](https://via.placeholder.com/300x200.png text=Pod+Logs) |
+| ... |... |... |
 
 ## Future Enhancements
 
@@ -96,7 +88,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Contact
 
-Project Link: [https://github.com/yourusername/LLM_Mgmt_Test](https://github.com/yourusername/LLM_Mgmt_Test)
+Project Link: [https://github.com/SkylerCherng00/SideProjectK8sMgmt](https://github.com/SkylerCherng00/SideProjectK8sMgmt)
 
 ---
 
