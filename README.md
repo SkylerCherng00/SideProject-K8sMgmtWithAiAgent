@@ -107,6 +107,7 @@ The application consists of four interconnected microservices:
    - User submits a natural language question or request via the chat interface
    - Request is sent to the backend services for processing
    - Security validation ensures the request conforms to Kubernetes operational constraints
+   - The LLM follows the ReAct prompting and uses tool calling to collect the K8s information
 
 2. **Intelligent Processing**:
    - Azure OpenAI processes the query with system context and safety guardrails
