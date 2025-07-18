@@ -138,11 +138,14 @@ The application consists of four interconnected microservices:
 
 ## Screenshots
 
-| AI Chat | AI Analysis | Kubernetes Dashboard for Metrics | Pod Logs |
-|---------|---------------------|----------|
-| <img src="https://github.com/SkylerCherng00/SideProjectK8sMgmt/blob/main/systemScreenshots/AIChat02.png?raw=true"> | <img src="https://github.com/SkylerCherng00/SideProjectK8sMgmt/blob/main/systemScreenshots/Analyze01.png?raw=true"> | <img src="https://github.com/SkylerCherng00/SideProjectK8sMgmt/blob/main/systemScreenshots/Metrics01.png?raw=true"> | <img src="https://github.com/SkylerCherng00/SideProjectK8sMgmt/blob/main/systemScreenshots/Logs01.png?raw=true"> |
-
-*Screenshots coming soon, showing the application's intuitive interfaces for AI interaction and Kubernetes management.*
+- AI Assistant: `systemScreenshots/AIChat02.png`
+<img src="https://github.com/SkylerCherng00/SideProjectK8sMgmt/blob/main/systemScreenshots/AIChat02.png?raw=true">
+- AI Analysis: `systemScreenshots/Analyze01.png`
+<img src="https://github.com/SkylerCherng00/SideProjectK8sMgmt/blob/main/systemScreenshots/Analyze01.png?raw=true">
+- Pods metrics monitoring: `systemScreenshots/Metrics01.png`
+<img src="https://github.com/SkylerCherng00/SideProjectK8sMgmt/blob/main/systemScreenshots/Metrics01.png?raw=true">
+- Logs querying: `systemScreenshots/Logs01.png`
+<img src="https://github.com/SkylerCherng00/SideProjectK8sMgmt/blob/main/systemScreenshots/Logs01.png?raw=true"> |
 
 ## Roadmap & Future Enhancements
 
