@@ -138,9 +138,9 @@ The application consists of four interconnected microservices:
 
 ## Screenshots
 
-| AI Chat | Kubernetes Dashboard for Metrics | Pod Logs |
+| AI Chat | AI Analysis | Kubernetes Dashboard for Metrics | Pod Logs |
 |---------|---------------------|----------|
-| <img src="https://github.com/SkylerCherng00/SideProjectK8sMgmt/blob/main/systemScreenshots/AIChat02.png?raw=true"> | <img src="https://github.com/SkylerCherng00/SideProjectK8sMgmt/blob/main/systemScreenshots/Metrics01.png?raw=true"> | <img src="https://github.com/SkylerCherng00/SideProjectK8sMgmt/blob/main/systemScreenshots/Logs01.png?raw=true"> |
+| <img src="https://github.com/SkylerCherng00/SideProjectK8sMgmt/blob/main/systemScreenshots/AIChat02.png?raw=true"> | <img src="https://github.com/SkylerCherng00/SideProjectK8sMgmt/blob/main/systemScreenshots/Analyze01.png?raw=true"> | <img src="https://github.com/SkylerCherng00/SideProjectK8sMgmt/blob/main/systemScreenshots/Metrics01.png?raw=true"> | <img src="https://github.com/SkylerCherng00/SideProjectK8sMgmt/blob/main/systemScreenshots/Logs01.png?raw=true"> |
 
 *Screenshots coming soon, showing the application's intuitive interfaces for AI interaction and Kubernetes management.*
 
