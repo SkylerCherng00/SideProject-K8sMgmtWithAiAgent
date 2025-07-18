@@ -1,74 +1,157 @@
-# LLM Management Agent
+# K8s Management with AI Agent
 
 [![.NET 9](https://img.shields.io/badge/.NET-9-512BD4)](https://dotnet.microsoft.com/)
 [![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-9.0-blue)](https://docs.microsoft.com/en-us/aspnet/core/)
 [![Python 3.12](https://img.shields.io/badge/Python-3.12-blue)](https://www.python.org/downloads/release/python-3120/)
+[![LangChain-core 0.3.69](https://img.shields.io/badge/LangChain-0.3.69-blue)](https://python.langchain.com/docs/)
 [![Kubernetes 1.32](https://img.shields.io/badge/Kubernetes-v1.32-green)](https://kubernetes.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Overview
 
-LLM Management Agent is a web application built with ASP.NET Core that combines AI chat functionality with Kubernetes cluster monitoring. It provides an intuitive interface for interacting with AI models and managing Kubernetes resources from a single dashboard.
+K8s Management with AI Agent is a sophisticated web application that seamlessly integrates AI-powered chat functionality with comprehensive Kubernetes cluster monitoring capabilities. Built with ASP.NET Core for the web interface and Python FastAPI for the AI components, this system provides Kubernetes administrators with an intuitive dashboard for both intelligent interaction and operational monitoring of Kubernetes resources.
 
-Screenshot
+[Screenshot]
 
-## Features
+## Key Features
 
-- **AI Chat Assistant**: Interact with LLM models through a conversational interface
-- **Kubernetes Monitoring**:
-  - Real-time pod metrics visualization
-  - Resource utilization tracking
-  - Pod logs viewing and searching
-  - Cluster state analysis
-- **Responsive Design**: Works on desktop and mobile devices
-- **Markdown Support**: Rich formatting for AI responses and analysis reports
+- **AI-Powered Chat Assistant**: 
+  - Interactive conversation with Azure OpenAI LLM models
+  - Real-time Kubernetes cluster analysis and recommendations
+  - Support for troubleshooting and operational queries
+  - Markdown-formatted responses for enhanced readability
 
-##  Getting Started
+- **Comprehensive Kubernetes Monitoring**:
+  - Real-time pod metrics visualization with dynamic charts
+  - Detailed resource utilization tracking across namespaces
+  - Advanced pod logs viewing with filtering and search capabilities
+  - Automated cluster health analysis and anomaly detection
 
-### Installation
+## Getting Started
 
-- Current Support deployment is on Docker
-- The stops for deployment:
-  - cd to the `deployment` directory
-  - `docker compose up -d --build`
-  - The application will be available at `http://localhost:8081`
+### Deployment
 
-##  Architecture
+The application is containerized and supports deployment via Docker:
 
-LLMMgmt follows the MVC (Model-View-Controller) architectural pattern:
+1. Navigate to the deployment directory:
+   ```bash
+   cd deployment
+   ```
 
-- **Models**: Data structures for AI chat, Kubernetes metrics, and analysis results
-- **Views**: Razor views for rendering UI components
-- **Controllers**: Process user actions and API interactions
-- **Services**: Handle external API calls and business logic
+2. Build and start the containers:
+   ```bash
+   docker compose up -d --build
+   ```
 
-### Key Components
+3. Access the application:
+   ```
+   http://localhost:8081
+   ```
 
-- llm_mgmt_web: ASP.NET Core MVC application
-- llm_client: FastAPI forClient application for AI chat and analysis
-- loki: FastAPI for Loki logging service
-- prom: FastAPI for Prometheus metrics service
+> **Important**: Review the **DockerNotes.md** file for critical setup information. The `llm_client` container requires SSH key exchange with the Jump Server for proper functioning of the Kubernetes tools. (Security Issue)
 
-## Technologies
+## System Architecture
 
-- **Backend**: ASP.NET Core 9.0, C#; Python 3.12 for FastAPI integration
-- **Frontend**: HTML5, CSS3, JavaScript, Bootstrap 5
-- **Data Visualization**: Chart.js for metrics display
-- **Text Processing**: Markdown rendering for AI outputs
-- **API Communication**: HttpClient, System.Text.Json
+### Application Architecture
 
-##  Workflow
+The application follows a clean MVC (Model-View-Controller) architectural pattern enhanced with service layers:
 
-1. **AI Chat**: 
-   - User sends message through the chat interface
-   - Message is processed by backend services
-   - AI response is displayed with markdown formatting
+- **Models**: Structured data entities representing AI chat conversations, Kubernetes metrics, and analysis results
+- **Views**: Razor-based templates providing responsive user interfaces with real-time data visualization
+- **Controllers**: Orchestration layer handling user requests, API coordination, and data flow management
+- **Services**: Specialized components managing external API communication, business logic, and data processing
 
-2. **Kubernetes Monitoring**:
-   - Application connects to Kubernetes API
-   - Metrics are collected and visualized
-   - Users can filter and analyze data
-   - Automated analysis provides insights on cluster health
+### Infrastructure Components
+
+### Infrastructure Components
+
+The system operates across four primary virtual machines:
+
+- **Jump Server**: Hosts Docker services and FastAPI endpoints for metrics queries, logs, and the LLM client
+- **Server**: Functions as the Kubernetes control plane managing the cluster
+- **Node-0 & Node-1**: Worker nodes executing containerized workloads
+- **PLG Stack**: Prometheus, Loki, and Grafana running on the Kubernetes cluster for comprehensive observability
+
+```mermaid
+graph TD
+  subgraph Kubernetes Cluster
+    Server[K8s Control Plane<br/>(Server)]
+    Node0[Worker Node<br/>(Node-0)]
+    Node1[Worker Node<br/>(Node-1)]
+    PLG[PLG Stack<br/>(Prometheus, Loki, Grafana, Promtail)]
+    Server --> Node0
+    Server --> Node1
+    Node0 --> PLG
+    Node1 --> PLG
+  end
+  Jump[Jump Server<br/>(Docker, FastAPI, LLM Client, Web UI)]
+  Jump --> Server
+  Jump --> PLG
+```
+
+### Microservice Components
+
+The application consists of four interconnected microservices:
+
+1. **llm_mgmt_web**: ASP.NET Core MVC application providing the user interface and dashboard functionality
+2. **llm_client**: Python FastAPI service implementing AI chat capabilities with LangChain and Azure OpenAI integration
+3. **loki**: FastAPI service for accessing and querying log data from the Loki logging subsystem
+4. **prom**: FastAPI service for retrieving metrics from the Prometheus monitoring system
+
+## Technology Stack
+
+### Backend Technologies
+- **ASP.NET Core 9.0**: High-performance C# framework for web applications
+- **Python 3.12**: Powers the AI components and API integrations
+- **FastAPI**: Modern, high-performance Python web framework for microservices
+- **Azure OpenAI**: Enterprise-grade LLM capabilities for intelligent assistance
+- **LangChain**: Framework for developing applications powered by language models
+
+### Frontend Technologies
+- **HTML5 / CSS3**: Standards-based web presentation
+- **JavaScript**: Dynamic client-side functionality
+- **Bootstrap 5**: Responsive UI component framework
+- **Chart.js**: Interactive and responsive data visualization
+
+### Data & Communication
+- **HttpClient**: .NET HTTP communication library
+- **System.Text.Json**: High-performance JSON handling
+- **Markdown**: Rich text formatting for AI responses
+- **REST APIs**: Standardized service communication
+
+## System Workflow
+
+### AI Chat Interaction
+1. **User Query Submission**: 
+   - User submits a natural language question or request via the chat interface
+   - Request is sent to the backend services for processing
+   - Security validation ensures the request conforms to Kubernetes operational constraints
+
+2. **Intelligent Processing**:
+   - Azure OpenAI processes the query with system context and safety guardrails
+   - LangChain framework orchestrates tool selection for Kubernetes data retrieval
+   - Multi-step reasoning generates comprehensive analysis and actionable insights
+
+3. **Response Rendering**:
+   - AI-generated response is formatted with Markdown for readability
+   - Results are displayed in the UI with proper formatting and syntax highlighting
+   - Supporting data visualizations are generated where appropriate
+
+### Kubernetes Monitoring Flow
+1. **Data Collection**: 
+   - System connects to Kubernetes API via secure endpoints in Jump Server
+   - Metrics are gathered from Prometheus for resource utilization
+   - Log data is collected from Loki for operational insights
+
+2. **Analysis & Processing**:
+   - Real-time data processing identifies patterns and anomalies
+   - Cross-correlation of metrics, logs, and state information
+   - Time-series analysis for trending and forecasting
+
+3. **Visualization & Insights**:
+   - Dynamic dashboards display pod health, resource usage, and system state
+   - Interactive filtering and search capabilities for targeted analysis
+   - AI-powered recommendations highlight potential improvements and issues
 
 ## Screenshots
 
@@ -76,18 +159,40 @@ LLMMgmt follows the MVC (Model-View-Controller) architectural pattern:
 |---------|---------------------|----------|
 | ... |... |... |
 
-## Future Enhancements
+*Screenshots coming soon, showing the application's intuitive interfaces for AI interaction and Kubernetes management.*
 
-- Long-term memory for AI interactions
-- User authentication and authorization
-- Integration with CI/CD pipelines
+## Roadmap & Future Enhancements
 
-## Contact
+The project has an active development roadmap with planned enhancements:
 
-Project Link: [https://github.com/SkylerCherng00/SideProjectK8sMgmt](https://github.com/SkylerCherng00/SideProjectK8sMgmt)
+- **AI Capabilities**:
+  - Persistent memory for contextual AI interactions
+  - Advanced anomaly detection for proactive monitoring
+  - Expanded knowledge base for specialized Kubernetes patterns
+
+- **Security & Access Control**:
+  - Comprehensive user authentication and role-based authorization
+  - Enhanced audit logging for compliance and security
+  - Fine-grained access controls for multi-tenant environments
+
+- **Integration & Extensions**:
+  - CI/CD pipeline integration for deployment insights
+  - Extended API ecosystem for third-party tool integration
+  - Advanced notification system for alerts and events
+  - **Tracing Integration**:
+    - Integration with Tempo for distributed tracing of microservices
+    - Visualize end-to-end request flows and latency bottlenecks
+    - Correlate traces with logs and metrics for comprehensive troubleshooting
+
+## Contact & Contribution
+
+This project is open to collaboration and contributions. For questions, feature requests, or issues, please reach out through the GitHub repository.
+
+Project Repository: [https://github.com/SkylerCherng00/SideProjectK8sMgmt](https://github.com/SkylerCherng00/SideProjectK8sMgmt)
 
 ---
 
 <p align="center">
-  Made with using ASP.NET Core and Python for AI integration
+  <strong>K8s Management with AI Agent</strong><br>
+  Built with ASP.NET Core and Python, powered by Azure OpenAI
 </p>

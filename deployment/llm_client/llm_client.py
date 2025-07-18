@@ -129,7 +129,7 @@ class AppState:
     def __init__(self):
         self.analysis_tools: list | None = None
         self.debug_tools: list | None = None
-        self.llm_judge: AzureChatOpenAI | None = None
+        # self.llm_judge: AzureChatOpenAI | None = None
         self.agent_analyzer: AgentExecutor | None = None
         self.agent_executor: AgentExecutor | None = None
         self.sysmsg_judge: str | None = None  # System prompt for safety check
