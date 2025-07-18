@@ -72,23 +72,6 @@ The system operates across four primary virtual machines:
 - **Node-0 & Node-1**: Worker nodes executing containerized workloads
 - **PLG Stack**: Prometheus, Loki, and Grafana running on the Kubernetes cluster for comprehensive observability
 
-```mermaid
-graph TD
-  subgraph Kubernetes Cluster
-    Server[K8s Control Plane<br/>(Server)]
-    Node0[Worker Node<br/>(Node-0)]
-    Node1[Worker Node<br/>(Node-1)]
-    PLG[PLG Stack<br/>(Prometheus, Loki, Grafana, Promtail)]
-    Server --> Node0
-    Server --> Node1
-    Node0 --> PLG
-    Node1 --> PLG
-  end
-  Jump[Jump Server<br/>(Docker, FastAPI, LLM Client, Web UI)]
-  Jump --> Server
-  Jump --> PLG
-```
-
 ### Microservice Components
 
 The application consists of four interconnected microservices:
