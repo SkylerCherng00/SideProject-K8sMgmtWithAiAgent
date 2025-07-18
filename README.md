@@ -145,7 +145,9 @@ The application consists of four interconnected microservices:
 - Pods metrics monitoring: `systemScreenshots/Metrics01.png`
 <img src="https://github.com/SkylerCherng00/SideProjectK8sMgmt/blob/main/systemScreenshots/Metrics01.png?raw=true">
 - Logs querying: `systemScreenshots/Logs01.png`
-<img src="https://github.com/SkylerCherng00/SideProjectK8sMgmt/blob/main/systemScreenshots/Logs01.png?raw=true"> |
+<img src="https://github.com/SkylerCherng00/SideProjectK8sMgmt/blob/main/systemScreenshots/Logs01.png?raw=true">
+- RWD Supported: `systemScreenshots/RWDSupport.png`
+<img src="https://github.com/SkylerCherng00/SideProjectK8sMgmt/blob/main/systemScreenshots/RWDSupport.png?raw=true">
 
 ## Roadmap & Future Enhancements
 
