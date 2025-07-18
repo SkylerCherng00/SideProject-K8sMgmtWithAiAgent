@@ -63,8 +63,6 @@ The application follows a clean MVC (Model-View-Controller) architectural patter
 
 ### Infrastructure Components
 
-### Infrastructure Components
-
 The system operates across four primary virtual machines:
 
 - **Jump Server**: Hosts Docker services and FastAPI endpoints for metrics queries, logs, and the LLM client
