@@ -11,7 +11,7 @@
 
 K8s Management with AI Agent is a sophisticated web application that seamlessly integrates AI-powered chat functionality with comprehensive Kubernetes cluster monitoring capabilities. Built with ASP.NET Core for the web interface and Python FastAPI for the AI components, this system provides Kubernetes administrators with an intuitive dashboard for both intelligent interaction and operational monitoring of Kubernetes resources.
 
-[Screenshot]
+<img src="https://github.com/SkylerCherng00/SideProjectK8sMgmt/blob/main/systemScreenshots/Frontpage.png?raw=true">
 
 ## Key Features
 
@@ -71,23 +71,6 @@ The system operates across four primary virtual machines:
 - **Server**: Functions as the Kubernetes control plane managing the cluster
 - **Node-0 & Node-1**: Worker nodes executing containerized workloads
 - **PLG Stack**: Prometheus, Loki, and Grafana running on the Kubernetes cluster for comprehensive observability
-
-```mermaid
-graph TD
-  subgraph Kubernetes Cluster
-    Server[K8s Control Plane<br/>(Server)]
-    Node0[Worker Node<br/>(Node-0)]
-    Node1[Worker Node<br/>(Node-1)]
-    PLG[PLG Stack<br/>(Prometheus, Loki, Grafana, Promtail)]
-    Server --> Node0
-    Server --> Node1
-    Node0 --> PLG
-    Node1 --> PLG
-  end
-  Jump[Jump Server<br/>(Docker, FastAPI, LLM Client, Web UI)]
-  Jump --> Server
-  Jump --> PLG
-```
 
 ### Microservice Components
 
@@ -155,11 +138,14 @@ The application consists of four interconnected microservices:
 
 ## Screenshots
 
-| AI Chat | Kubernetes Dashboard | Pod Logs |
-|---------|---------------------|----------|
-| ... |... |... |
-
-*Screenshots coming soon, showing the application's intuitive interfaces for AI interaction and Kubernetes management.*
+- AI Assistant: `systemScreenshots/AIChat02.png`
+<img src="https://github.com/SkylerCherng00/SideProjectK8sMgmt/blob/main/systemScreenshots/AIChat02.png?raw=true">
+- AI Analysis: `systemScreenshots/Analyze01.png`
+<img src="https://github.com/SkylerCherng00/SideProjectK8sMgmt/blob/main/systemScreenshots/Analyze01.png?raw=true">
+- Pods metrics monitoring: `systemScreenshots/Metrics01.png`
+<img src="https://github.com/SkylerCherng00/SideProjectK8sMgmt/blob/main/systemScreenshots/Metrics01.png?raw=true">
+- Logs querying: `systemScreenshots/Logs01.png`
+<img src="https://github.com/SkylerCherng00/SideProjectK8sMgmt/blob/main/systemScreenshots/Logs01.png?raw=true"> |
 
 ## Roadmap & Future Enhancements
 
