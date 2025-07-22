@@ -81,24 +81,11 @@ The application consists of four interconnected microservices:
 
 ## Technology Stack
 
-### Backend Technologies
 - **ASP.NET Core 9.0**: High-performance C# framework for web applications
 - **Python 3.12**: Powers the AI components and API integrations
 - **FastAPI**: Modern, high-performance Python web framework for microservices
 - **Azure OpenAI**: Enterprise-grade LLM capabilities for intelligent assistance
 - **LangChain**: Framework for developing applications powered by language models
-
-### Frontend Technologies
-- **HTML5 / CSS3**: Standards-based web presentation
-- **JavaScript**: Dynamic client-side functionality
-- **Bootstrap 5**: Responsive UI component framework
-- **Chart.js**: Interactive and responsive data visualization
-
-### Data & Communication
-- **HttpClient**: .NET HTTP communication library
-- **System.Text.Json**: High-performance JSON handling
-- **Markdown**: Rich text formatting for AI responses
-- **REST APIs**: Standardized service communication
 
 ## System Workflow
 
