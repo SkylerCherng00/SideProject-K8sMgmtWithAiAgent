@@ -5,6 +5,7 @@
 [![Python 3.12](https://img.shields.io/badge/Python-3.12-blue)](https://www.python.org/downloads/release/python-3120/)
 [![LangChain-core 0.3.69](https://img.shields.io/badge/LangChain-0.3.69-blue)](https://python.langchain.com/docs/)
 [![Kubernetes 1.32](https://img.shields.io/badge/Kubernetes-v1.32-green)](https://kubernetes.io/)
+[![PostgreSQL 14](https://img.shields.io/badge/PostgreSQL-v14)](https://kubernetes.io/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Overview
