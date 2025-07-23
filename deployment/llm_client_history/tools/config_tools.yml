@@ -1,0 +1,8 @@
+# Jump Server SSH settings
+jump_server_host: "test@jumpserver"
+jump_server_ssh_arguments: "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no"
+
+# API endpoints
+# The llm_client have to be in the same docker network as loki and prometheus
+loki_api_url: "http://loki:10001/loki"  # Loki API DNS name in docker network
+prometheus_api_url: "http://prometheus:10002/prom"  # Prometheus API DNS name in docker network

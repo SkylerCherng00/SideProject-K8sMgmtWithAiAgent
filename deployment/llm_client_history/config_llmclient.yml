@@ -6,3 +6,7 @@ azure_endpoint: ""
 # Azure OpenAI Deployment Names
 judge_deployment_name: "gpt-4.1"
 agent_deployment_name: "gpt-4.1"
+
+# PostgreSQL Information
+postgres_connection_string: "postgresql://<username>:<password>@postgres:5432/<database_name>"
+postgres_talbe_name: "chat_history"

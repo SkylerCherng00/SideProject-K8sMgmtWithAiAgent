@@ -1,0 +1,16 @@
+# ref: https://hub.docker.com/_/postgres
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:14  # Specify the PostgreSQL version
+    #restart: always
+    shm_size: 200mb  # set shared memory limit when using docker compose
+    environment:
+      - POSTGRES_USER=adminuser  # Replace with your desired username
+      - POSTGRES_PASSWORD=adminuser  # Replace with your desired password
+      - POSTGRES_DB=records_dialog  # Replace with your desired database name
+    ports:
+      - "5432:5432"  # Expose the container's port 5432 to the host's port 5432
+    volumes:
+      - ./db:/var/lib/postgresql/data  # Persist data using a named volume

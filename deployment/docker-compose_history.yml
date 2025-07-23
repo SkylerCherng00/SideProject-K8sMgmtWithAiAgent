@@ -1,0 +1,105 @@
+services:
+  loki:
+    image: prjapi_loki_image:1.0.0
+    container_name: prjapi_loki
+    build:
+      context: ./loki
+      dockerfile: dockerfile
+      tags:
+        - prjapi_loki_image:1.0.0
+    # ports:
+    #   - "10001:10001"
+    networks:
+      - prjapi-network
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'      # Limit container to use max 20% of a CPU core
+          memory: 100M     # Limit container to use max 100 megabytes of memory
+
+  prometheus:
+    image: prjapi_prom_image:1.0.0
+    container_name: prjapi_prom
+    build:
+      context: ./prom
+      dockerfile: dockerfile
+      tags:
+        - prjapi_prom_image:1.0.0
+    # ports:
+    #   - "10002:10002"
+    networks:
+      - prjapi-network
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '0.15'
+          memory: 100M
+          
+  llm_client:
+    image: prjapi_llmclient_image:1.0.0
+    container_name: prjapi_llmclient
+    build:
+      context: ./llm_client
+      dockerfile: dockerfile
+      tags:
+        - prjapi_llmclient_image:1.0.0
+    extra_hosts: # This will automatically add: `ip fqdn` into `/etc/hosts` at container start
+      - "jumpserver:192.168.72.10"
+    # ports:
+    #   - "10000:10000"
+    networks:
+      - prjapi-network
+    volumes:
+      - ./mnt:/root/.ssh
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 100M 
+
+  llmmgmt-web:
+    image: prjweb_llmmgmt_image:1.0.0
+    container_name: prjweb_llmmgmt
+    build:
+      context: ./llm_mgmt_web
+      dockerfile: dockerfile
+      tags:
+        - prjweb_llmmgmt_image:1.0.0
+    ports:
+      - "8081:8081"
+    restart: always
+    networks:
+      - prjapi-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.3'
+          memory: 500M 
+  postgres:
+    image: postgres:14
+    container_name: postgres
+    restart: always
+    shm_size: 200mb  # set shared memory limit when using docker compose
+    environment:
+      - POSTGRES_USER=<adminuser>  # Replace with your desired username
+      - POSTGRES_PASSWORD=<adminuser_pw>  # Replace with your desired password
+      - POSTGRES_DB=<database_name>  # Replace with your desired database name
+    # ports:
+    #   - "5432:5432"  # Expose the container's port 5432 to the host's port 5432
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    networks:
+      - prjapi-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 200M 
+
+networks:
+  prjapi-network:
+    driver: bridge
+    name: prj-network
