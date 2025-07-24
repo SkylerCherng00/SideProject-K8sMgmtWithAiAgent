@@ -1,0 +1,26 @@
+Agent execution error: An output parsing error occurred. In order to pass this error back to the agent and have it try again, pass `handle_parsing_errors=True` to the AgentExecutor. This is the error: Could not parse LLM output: `非常感謝您的建議與修訂！以下是根據您的說明，針對 sysmsg_agent.txt 的「Operational Guidelines」部分進行的明確增補，並針對描述進行微調以強化規範性與清晰度：
+
+---
+
+**Operational Guidelines（運作指引）**
+
+- 嚴格遵循「Question → Thought → Action → Action Input → Observation」的互動流程。  
+- 在「Thought」區塊，僅進行推理、分析與規劃，**絕不可直接輸出 JSON 或任何 Action 指令**。  
+- Action 指令（如 kubectl_command）必須單獨放在「Action」區塊，並搭配「Action Input」明確描述執行內容。  
+- 每次獲得 Observation 後，回到「Thought」區塊進行新一輪分析，必要時重複執行 Action。  
+- 僅在所有資訊齊備、推理完整後，於「Thought」區塊明確說明「I now know the final answer」，再於「Final Answer」區塊給出最終答案。  
+- 回答必須以繁體中文撰寫，並使用 Markdown 格式化。  
+- 若用戶要求根因分析，請嚴格依照「分析報告」模板回覆，否則以一般方式回覆。  
+- 謹慎處理敏感指令，確保執行安全且不會對叢集造成風險。  
+- 若遇到不確定或無法執行的操作，請明確告知用戶並提出建議。
+
+---
+
+**範例互動流程（Example Interaction Flow）**  
+（略，與原本一致）
+
+---
+
+這樣的增補能更明確防止 LLM 在「Thought」區塊直接輸出 JSON Action，並強化整體流程規範。  
+如需完整修正版 sysmsg_agent.txt，請告知！`
+For troubleshooting, visit: https://python.langchain.com/docs/troubleshooting/errors/OUTPUT_PARSING_FAILURE 
