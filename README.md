@@ -12,7 +12,7 @@
 
 K8s Management with AI Agent is a sophisticated web application that seamlessly integrates AI-powered chat functionality with comprehensive Kubernetes cluster monitoring capabilities. Built with ASP.NET Core for the web interface and Python FastAPI for the AI components, this system provides Kubernetes administrators with an intuitive dashboard for both intelligent interaction and operational monitoring of Kubernetes resources.
 
-<img src="https://github.com/SkylerCherng00/SideProjectK8sMgmt/blob/main/systemScreenshots/Frontpage.png?raw=true">
+<img src="https://github.com/SkylerCherng00/SideProjectK8sMgmt/blob/main/systemScreenshots/FrontpageEN.png?raw=true">
 
 ## Key Features
 
