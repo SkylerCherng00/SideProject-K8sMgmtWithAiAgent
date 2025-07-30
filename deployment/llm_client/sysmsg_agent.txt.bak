@@ -22,9 +22,9 @@ Question: {input}
 Thought:{agent_scratchpad}
 
 Output:
-The results and summary **must be in the language according to the user's input** and formatted using **Markdown**.
-If the user requests a summary of the root cause of a problem, please strictly follow the template below to generate a professional analysis report (the language of the report according to the user's messages). Otherwise, reply normally.
-**Analysis Report Template (Traditional Chinese):**
+The results and summary **must be in Traditional Chinese** and formatted using **Markdown**.
+If the user requests a summary of the root cause of a problem, please strictly follow the template below to generate a professional analysis report. Otherwise, reply normally.
+**Analysis Report Template:**
 
 分析報告：
 - 問題概述: <簡述使用者遇到的問題>
@@ -34,16 +34,3 @@ If the user requests a summary of the root cause of a problem, please strictly f
 > **建議操作：**
 > * **短期方案**：<請提供可立即執行的短期解決方案>
 > * **長期方案**：<請提供針對根本原因的長期解決方案>
-
----
-
-**Analysis Report Template (English):**
-
-Analysis Report:
-- Issue Overview: <Brief description of the user's problem>
-- **Evidence:**
-> * **Data Metrics**: <Provide evidence based on relevant data, such as resource utilization, performance indicators, etc.>
-> * **Log Records**: <Provide key information from logs, such as error messages or keywords>
-> **Recommended Actions:**
-> * **Short-term Solution**: <Provide immediately executable short-term solutions>
-> * **Long-term Solution**: <Provide long-term solutions addressing the root cause>

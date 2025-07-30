@@ -1,13 +1,13 @@
 ﻿@{
     // Set the page title that will be displayed in the browser tab and page header
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "首頁";
 }
 
 <!-- Main container using Bootstrap grid system -->
 <div class="row">
     <div class="col-12">
         <!-- Page header with welcome message -->
-        <h1 class="mb-4">Welcome to AI-Assisted K8s Management System</h1>
+        <h1 class="mb-4">歡迎來到 AI 輔助 K8s 管理系統</h1>
         <!-- 
             ========================================
             KUBERNETES CLUSTER ANALYSIS SECTION
@@ -23,7 +23,7 @@
                     <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">
                             <!-- FontAwesome search icon with margin -->
-                            <i class="fas fa-search-plus me-2"></i> Kubernetes Cluster Status Analysis
+                            <i class="fas fa-search-plus me-2"></i> Kubernetes 叢集現況分析
                         </h5>
                         <div class="d-flex gap-2">
                             <!-- 
@@ -32,7 +32,7 @@
                                 - Dynamically updates icon and text via JavaScript
                             -->
                             <button id="toggleAnalysisBtn" class="btn btn-outline-light btn-sm rounded-pill" type="button" data-bs-toggle="collapse" data-bs-target="#analysisContent" aria-expanded="true" aria-controls="analysisContent">
-                                <i class="fas fa-angle-up"></i> <span>Collapse Content</span>
+                                <i class="fas fa-angle-up"></i> <span>收起內容</span>
                             </button>
                             <!-- 
                                 Primary action button that triggers K8s analysis
@@ -41,7 +41,7 @@
                                 - Connected to k8s-analyzer.js JavaScript module
                             -->
                             <button id="analyzeK8sBtn" class="btn btn-light btn-sm rounded-pill">
-                                <i class="fas fa-sync-alt me-1"></i> Analyze Cluster Now
+                                <i class="fas fa-sync-alt me-1"></i> 立即分析叢集
                             </button>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                                     - Contains instructions and collapse toggle
                                 -->
                                 <div class="alert alert-info">
-                                    <i class="fas fa-info-circle me-2"></i> Click the "Analyze Cluster Now" button to get a Kubernetes cluster status report for the last 30 minutes.
+                                    <i class="fas fa-info-circle me-2"></i> 點擊「立即分析叢集」按鈕以獲取 Kubernetes 叢集近 30 分鐘的運行狀況報告。
                                 </div>
 
                                 <!-- 
@@ -71,9 +71,9 @@
                                 -->
                                 <div id="k8sAnalysisLoading" class="text-center my-4 d-none">
                                     <div class="spinner-border text-primary" role="status">
-                                        <span class="visually-hidden">Loading...</span>
+                                        <span class="visually-hidden">正在載入...</span>
                                     </div>
-                                    <p class="mt-2">Analyzing cluster status, please wait...</p>
+                                    <p class="mt-2">正在分析叢集狀態，請稍候...</p>
                                 </div>
 
                                 <!-- 
@@ -111,16 +111,16 @@
                     <div class="card-body">
                         <h5 class="card-title">
                             <!-- Blue comment icon representing chat functionality -->
-                            <i class="fas fa-comments text-primary"></i> AI Chat Assistant
+                            <i class="fas fa-comments text-primary"></i> AI 聊天助手
                         </h5>
-                        <p class="card-text">Chat with AI assistant to get intelligent responses and assistance.</p>
+                        <p class="card-text">與 AI 助手進行對話，獲得智能回應和協助。</p>
                         <!-- 
                             Navigation link to AI Chat functionality
                             - Uses Razor's Url.Action helper to generate route
                             - Points to AiChat action in Home controller
                         -->
                         <a href="@Url.Action("AiChat", "Home")" class="btn btn-primary rounded-md">
-                            <i class="fas fa-arrow-right"></i> Start Chat
+                            <i class="fas fa-arrow-right"></i> 開始對話
                         </a>
                     </div>
                 </div>
@@ -132,9 +132,9 @@
                     <div class="card-body">
                         <h5 class="card-title">
                             <!-- Green cubes icon representing Kubernetes -->
-                            <i class="fas fa-cubes text-success"></i> Kubernetes Dashboard
+                            <i class="fas fa-cubes text-success"></i> Kubernetes 儀表板
                         </h5>
-                        <p class="card-text">View and manage Pod monitoring and metrics in Kubernetes clusters.</p>
+                        <p class="card-text">查看和管理 Kubernetes 集群中的 Pod 監控和指標。</p>
                         <!-- 
                             Multiple action buttons for different K8s functionalities
                             - Dashboard: Pod monitoring and metrics
@@ -142,10 +142,10 @@
                         -->
                         <div class="d-flex gap-2">
                             <a href="@Url.Action("Pods", "Kubernetes")" class="btn btn-success rounded-md">
-                                <i class="fas fa-chart-line"></i> View Dashboard
+                                <i class="fas fa-chart-line"></i> 查看儀表板
                             </a>
                             <a href="@Url.Action("Logs", "Kubernetes")" class="btn btn-info rounded-md">
-                                <i class="fas fa-file-alt"></i> View Logs
+                                <i class="fas fa-file-alt"></i> 查看日誌
                             </a>
                         </div>
                     </div>
@@ -168,16 +168,16 @@
                     <div class="card-body">
                         <h5 class="card-title">
                             <!-- Orange vial icon representing testing -->
-                            <i class="fas fa-vial text-warning"></i> API Connection Test
+                            <i class="fas fa-vial text-warning"></i> API 連接測試
                         </h5>
-                        <p class="card-text">Test the connection status and data structure with Kubernetes API.</p>
+                        <p class="card-text">測試與 Kubernetes API 的連接狀態和數據結構。</p>
                         <!-- 
                             Link to API testing functionality
                             - Points to TestApi action in Kubernetes controller
                             - Useful for debugging and connection verification
                         -->
                         <a href="@Url.Action("TestApi", "Kubernetes")" class="btn btn-warning rounded-md">
-                            <i class="fas fa-flask"></i> Test API
+                            <i class="fas fa-flask"></i> 測試 API
                         </a>
                     </div>
                 </div>
@@ -189,20 +189,20 @@
                     <div class="card-body">
                         <h5 class="card-title">
                             <!-- Blue info icon -->
-                            <i class="fas fa-info-circle text-info"></i> System Features
+                            <i class="fas fa-info-circle text-info"></i> 系統功能
                         </h5>
-                        <p class="card-text">This system provides the following main features:</p>
+                        <p class="card-text">本系統提供以下主要功能：</p>
                         <!-- 
                             Feature list with check icons
                             - Unstyled list for clean appearance
                             - Each item has a green check circle icon
                         -->
                         <ul class="list-unstyled">
-                            <li><i class="fas fa-check-circle text-success"></i> AI Chat Conversation Feature</li>
-                            <li><i class="fas fa-check-circle text-success"></i> Kubernetes Pod Monitoring</li>
-                            <li><i class="fas fa-check-circle text-success"></i> Pod Log Search and Viewing</li>
-                            <li><i class="fas fa-check-circle text-success"></i> Real-time Charts and Metrics</li>
-                            <li><i class="fas fa-check-circle text-success"></i> Auto-refresh (Every Minute)</li>
+                            <li><i class="fas fa-check-circle text-success"></i> AI 聊天對話功能</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Kubernetes Pod 監控</li>
+                            <li><i class="fas fa-check-circle text-success"></i> Pod 日誌搜索和查看</li>
+                            <li><i class="fas fa-check-circle text-success"></i> 即時圖表和指標</li>
+                            <li><i class="fas fa-check-circle text-success"></i> 自動刷新（每分鐘）</li>
                         </ul>
                     </div>
                 </div>
@@ -257,11 +257,11 @@
                 if (toggleBtn.getAttribute('aria-expanded') === 'true') {
                     // Content is expanded, show "collapse" state
                     toggleIcon.classList.replace('fa-angle-up', 'fa-angle-down');
-                    toggleText.textContent = 'Expand Content';
+                    toggleText.textContent = '展開內容';
                 } else {
                     // Content is collapsed, show "expand" state
                     toggleIcon.classList.replace('fa-angle-down', 'fa-angle-up');
-                    toggleText.textContent = 'Collapse Content';
+                    toggleText.textContent = '收起內容';
                 }
             });
         });

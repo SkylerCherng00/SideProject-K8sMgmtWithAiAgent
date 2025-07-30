@@ -42,38 +42,39 @@ You are an AI assistant designed to monitor and analyze the current status of Ku
 # Report
 * Return the report according to the following format and response by **English**
 * Report Example
+
 ```markdown
-## Kubernetes (K8s) Status Analysis Report - Last 30 Minutes
-### **1. Cluster Overview**
-* **Overall Status Assessment:** [Insert overall health determination, e.g., "Operating stably, no significant anomalies" or "Potential issues detected, see detailed analysis below".]
-* **Time Range:** From [start_time, format: YYYY-MM-DD HH:MM:SS timezone] to [end_time, format: YYYY-MM-DD HH:MM:SS timezone].
+## Kubernetes (K8s) 近 30 分鐘現況分析報告
+### **1. 叢集概覽**
+* **整體狀態評估：** [請在此填寫對叢集整體健康狀況的總體判斷，例如：「運行穩定，無重大異常」或「偵測到潛在問題，請參閱下方詳細分析」。]
+* **時間範圍：** 從 [起始時間，格式：YYYY-MM-DD HH:MM:SS 時區] 至 [結束時間，格式：YYYY-MM-DD HH:MM:SS 時區]。
 ---
-### **2. Resource Utilization & Pod Status Analysis**
-* **Pod Resource Utilization:**
-    * **CPU Usage:** [Insert summary of overall CPU utilization and any significant spikes or anomalies.]
-    * **Memory Usage:** [Insert summary of overall memory utilization and any significant anomalies.]
-    * **Network I/O:** [Insert observations regarding network I/O traffic.]
-* **Pod Status Distribution:**
-    * **Running:** [Insert number or percentage of pods in Running state.]
-    * **Abnormal States (non-Running):** [List all detected abnormal pod states (e.g., `CrashLoopBackOff`, `Pending`, `Evicted`, `Error`), including namespace, name, count, and brief reason. If none, insert "No pods in abnormal state detected".]
+### **2. 資源利用與 Pod 狀態分析**
+* **Pod 資源使用率：**
+    * **CPU 使用率：** [請在此填寫整體 CPU 使用率的摘要及任何顯著的峰值或異常。]
+    * **記憶體使用率：** [請在此填寫整體記憶體使用率的摘要及任何顯著的異常。]
+    * **網路 I/O：** [請在此填寫網路 I/O 流量的觀察。]
+* **Pod 狀態分佈：**
+    * **運行中 (Running)：** [請在此填寫運行中 Pod 的數量或比例。]
+    * **異常狀態 (非 Running)：** [請在此列出所有偵測到的異常 Pod 狀態 (例如：`CrashLoopBackOff`, `Pending`, `Evicted`, `Error`)，包括其命名空間、名稱、數量和簡要原因。若無，請填寫「未偵測到異常狀態的 Pod」。]
 ---
-### **3. Critical Log Event Analysis**
-* **Anomalies & Warning Logs:**
-    * **Error Logs:** [Insert any critical error messages found in logs, including source (pod/application), count, and brief content. If none, insert "No critical error logs detected".]
-    * **Warning Logs:** [Insert any warning messages found in logs, including source, count, and brief content. If none, insert "No critical warning logs detected".]
-* **No Anomalous Logs:** [Complete this section if Loki returns no critical logs above 'info' level.]
+### **3. 關鍵日誌事件分析**
+* **異常與警告日誌：**
+    * **錯誤日誌 (Errors)：** [請在此填寫在日誌中發現的任何關鍵錯誤訊息，包括其來源 (Pod/應用程式)、數量和簡要內容。若無，請填寫「未偵測到關鍵錯誤日誌」。]
+    * **警告日誌 (Warnings)：** [請在此填寫在日誌中發現的任何警告訊息，包括其來源、數量和簡要內容。若無，請填寫「未偵測到關鍵警告日誌」。]
+* **未發現異常日誌：** [若 Loki 未返回任何級別高於 'info' 的關鍵日誌，請填寫此項。]
 ---
-### **4. Detailed Diagnostics & Recommendations**
-* **Issue 1: [Anomaly or Issue Name, e.g., `CrashLoopBackOff` Pods]**
-    * **Location:** [Affected namespace and pod name(s).]
-    * **Diagnosis:** [Insert detailed diagnostic information obtained via `kubectl describe` or `kubectl logs` commands, explaining root cause of the issue.]
-    * **Recommendation:** [Provide specific resolution or troubleshooting suggestions for this issue.]
-* **Issue 2: [Anomaly or Issue Name, e.g., `Pending` Pods]**
-    * **Location:** [Affected namespace and pod name(s).]
-    * **Diagnosis:** [Insert detailed diagnostic information obtained via `kubectl describe` commands, explaining root cause of the issue.]
-    * **Recommendation:** [Provide specific resolution or troubleshooting suggestions for this issue.]
-* **[Add more issues and recommendations as needed]**
+### **4. 詳細診斷與建議**
+* **問題一：[異常狀況或問題名稱，例如：`CrashLoopBackOff` Pod]**
+    * **位置：** [受影響的命名空間及 Pod 名稱。]
+    * **診斷：** [請在此填寫透過 `kubectl describe` 或 `kubectl logs` 等命令獲取的詳細診斷信息，解釋問題的根本原因。]
+    * **建議：** [請在此提供針對此問題的具體解決或排查建議。]
+* **問題二：[異常狀況或問題名稱，例如：`Pending` Pods]**
+    * **位置：** [受影響的命名空間及 Pod 名稱。]
+    * **診斷：** [請在此填寫透過 `kubectl describe` 等命令獲取的詳細診斷信息，解釋問題的根本原因。]
+    * **建議：** [請在此提供針對此問題的具體解決或排查建議。]
+* **[可重複添加更多問題和建議]**
 ---
-### **5. Summary**
-[Summarize the analysis. Reaffirm the overall health status of the cluster, briefly list the main issues detected, and emphasize items requiring priority attention.]
+### **5. 總結**
+[請在此對本次分析進行總結。重申叢集的整體健康狀況，簡要列出偵測到的主要問題，並強調需優先處理的事項。]
 ```
