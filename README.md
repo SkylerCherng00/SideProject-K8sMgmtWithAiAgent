@@ -74,7 +74,7 @@ The system operates across four primary virtual machines:
 - **Jump Server**: Hosts Docker services and FastAPI endpoints for metrics queries, logs, and the LLM client
 - **Server**: Functions as the Kubernetes control plane managing the cluster
 - **Node-0 & Node-1**: Worker nodes executing containerized workloads
-- **PLG Stack**: Prometheus, Loki, and Grafana running on the Kubernetes cluster for comprehensive observability
+- **PLG Stack**: Promtail, Loki, Grafana, Prometheus, and Tempo running on the Kubernetes cluster for comprehensive observability
 
 ### Microservice Components
 
