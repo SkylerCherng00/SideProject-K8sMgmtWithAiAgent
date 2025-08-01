@@ -10,17 +10,17 @@
 
 ## Presentation
 ### Slides
-- English: https://g.co/gemini/share/08977e46dd63
-- Traditional Chinese: https://g.co/gemini/share/75b403c6f5d0
+- English: [Simplifying Kubernetes Management with AI: Smart Operations for Small Teams](https://g.co/gemini/share/08977e46dd63)
+- Traditional Chinese: [用 AI 讓 Kubernetes 管理變簡單：小團隊的智慧維運之路](https://g.co/gemini/share/75b403c6f5d0)
 
 ### Videos
-- Playlist: https://www.youtube.com/playlist?list=PLgCZdo5udrwCEE6bac4uaaWRkeIrCXmjT
+- Playlist: [Tibame_AI 商務應用班_個人專題](https://www.youtube.com/playlist?list=PLgCZdo5udrwCEE6bac4uaaWRkeIrCXmjT)
 - Presentation
-  - English: https://youtu.be/-wATmkycC9o
-  - Traditional Chinese: https://youtu.be/0o8w0lhnX0A
+  - English: [K8s Management with AI Agent - Presentation](https://youtu.be/-wATmkycC9o)
+  - Traditional Chinese: [K8s AI 輔助管理系統 - 簡報](https://youtu.be/0o8w0lhnX0A)
 - Demo
-  - English: https://youtu.be/iyOgPpsgZyQ
-  - Traditional Chinese: https://youtu.be/E2yeMK7y0Sc
+  - English: [K8s Management with AI Agent - Demo](https://youtu.be/iyOgPpsgZyQ)
+  - Traditional Chinese: [K8s AI 輔助管理系統 - 系統展示](https://youtu.be/E2yeMK7y0Sc)
 
 ## Overview
 
