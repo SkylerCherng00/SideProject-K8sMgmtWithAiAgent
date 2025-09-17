@@ -10,7 +10,7 @@
 
 ## Presentation
 ### Slides
-- English: [Simplifying Kubernetes Management with AI: Smart Operations for Small Teams](https://g.co/gemini/share/08977e46dd63)
+- English: [Simplifying Kubernetes Management with AI: Smart Operations for Small Teams](https://g.co/gemini/share/e358c442c1e5)
 - Traditional Chinese: [用 AI 讓 Kubernetes 管理變簡單：小團隊的智慧維運之路](https://g.co/gemini/share/75b403c6f5d0)
 
 ### Videos
